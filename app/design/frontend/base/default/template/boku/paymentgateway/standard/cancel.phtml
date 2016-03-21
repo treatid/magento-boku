@@ -1,0 +1,13 @@
+<?php
+/**
+ * After failed Boku buy-url submission (via Prepare block)
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author 		MDH <mdh@treatid.me.uk>
+ */
+?>
+<script type="text/javascript">
+	parent.location = "<?php echo $this->getRedirectUrl(); ?>";
+</script>

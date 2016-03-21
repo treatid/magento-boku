@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Boku admin menu
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author		MDH <mdh@treatid.me.uk>
+ */
+-->
+<config>
+	<menu>
+		<system>
+			<children>
+				<boku translate="title" module="boku">
+					<title>Boku</title>
+					<sort_order>1000</sort_order>
+					<children>
+						<settings translate="title">
+							<title>Configure</title>
+							<action>adminhtml/system_config/edit/section/payment</action>
+							<sort_order>1</sort_order>
+						</settings>
+						<test translate="title">
+							<title>Test</title>
+							<action>boku_admin/adminhtml_boku/test</action>
+							<sort_order>10</sort_order>
+						</test>
+					</children>
+				</boku>
+			</children>
+		</system>
+	</menu>
+	<acl>
+		<resources>
+			<all translate="title">
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<boku>
+								<title>Boku</title>
+								<children>
+									<settings translate="title">
+										<title>Configure</title>
+									</settings>
+									<test translate="title">
+										<title>Test Settings</title>
+									</test>
+								</children>
+							</boku>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

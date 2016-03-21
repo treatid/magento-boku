@@ -1,0 +1,14 @@
+<?php
+/**
+ * Payment Form
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author 		MDH <mdh@treatid.me.uk>
+ */
+$helper = Mage::helper('boku');
+$networks = $helper->getSession()->getNetworks();
+if (is_array($networks)): ?>
+	<p><?php echo $helper->__('Available on these networks').': '.implode(', ', $networks); ?></p>
+<?php endif; ?>

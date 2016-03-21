@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Main Module configuration
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author 		MDH <mdh@treatid.me.uk>
+ */
+-->
+<config>
+	<modules>
+		<Boku_Paymentgateway>
+			<version>0.0.4</version>
+		</Boku_Paymentgateway>
+	</modules>
+
+	<global>
+		<models>
+			<boku>
+				<class>Boku_Paymentgateway_Model</class>
+				<resourceModel>boku_resource</resourceModel>
+			</boku>
+			<boku_resource>
+				<class>Boku_Paymentgateway_Model_Resource</class>
+				<entities>
+					<payment_transaction>
+						<table>boku_transactions</table>
+					</payment_transaction>
+					<payment_callback>
+						<table>boku_callbacks</table>
+					</payment_callback>
+					<payment_event>
+						<table>boku_events</table>
+					</payment_event>
+					<payment_chargeback>
+						<table>boku_chargebacks</table>
+					</payment_chargeback>
+				</entities>
+			</boku_resource>
+		</models>
+
+		<resources>
+			<boku_setup>
+				<setup>
+					<module>Boku_Paymentgateway</module>
+					<class>Boku_Paymentgateway_Model_Resource_Setup</class>
+				</setup>
+			</boku_setup>
+		</resources>
+
+		<helpers>
+			<boku>
+				<class>Boku_Paymentgateway_Helper</class>
+			</boku>
+		</helpers>
+
+		<blocks>
+			<boku>
+				<class>Boku_Paymentgateway_Block</class>
+			</boku>
+		</blocks>
+
+	</global>
+
+	<admin>
+		<routers>
+			<!--adminhtml>
+				<args>
+					<modules>
+						<Boku_Paymentgateway>Boku_Paymentgateway_Adminhtml</Boku_Paymentgateway>
+					</modules>
+				</args>
+			</adminhtml-->
+			<boku_admin>
+				<use>admin</use>
+				<args>
+					<module>Boku_Paymentgateway</module>
+					<frontName>boku_admin</frontName>
+				</args>
+			</boku_admin>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<boku_paymentgateway>
+					<file>boku_paymentgateway.xml</file>
+				</boku_paymentgateway>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Boku_Paymentgateway>
+					<files>
+						<default>Boku_Paymentgateway.csv</default>
+					</files>
+				</Boku_Paymentgateway>
+			</modules>
+		</translate>
+	</adminhtml>
+
+	<frontend>
+		<secure_url>
+			<boku>/boku/standard</boku>
+			<bokuapi>/boku/api</bokuapi>
+		</secure_url>
+
+		<routers>
+			<boku>
+				<use>standard</use>
+				<args>
+					<module>Boku_Paymentgateway</module>
+					<frontName>boku</frontName>
+				</args>
+			</boku>
+		</routers>
+
+		<translate>
+			<modules>
+				<Boku_Paymentgateway>
+					<files>
+						<default>Boku_Paymentgateway.csv</default>
+					</files>
+				</Boku_Paymentgateway>
+			</modules>
+		</translate>
+
+		<layout>
+			<updates>
+				<boku_paymentgateway>
+					<file>boku_paymentgateway.xml</file>
+				</boku_paymentgateway>
+			</updates>
+		</layout>
+	</frontend>
+
+	<default>
+		<payment>
+			<boku>
+				<model>boku/payment_standard</model>
+				<payment_action>Authorization</payment_action>
+				<mode>1</mode>
+				<active>0</active>
+				<auto_invoice>0</auto_invoice>
+				<title>Boku (Pay by Mobile)</title>
+				<order_status>processing</order_status>
+				<api_security_key backend_model="adminhtml/system_config_backend_encrypted" />
+				<!--payment>
+				NOT IMPLEMENTED
+					<commission_add>0</commission_add>
+					<below_min>0</below_min>
+					<above_max>0</above_max>
+					<unavailable>0</unavailable>
+					<max>0</max>
+				</payment-->
+				<url>
+					<pricelist>https://api2.boku.com/pricing/1.0/price-list</pricelist>
+					<priceinfo>https://api2.boku.com/pricing/1.0/price-info</priceinfo>
+					<prepare>https://api2.boku.com/billing/request?action=prepare</prepare>
+				</url>
+			</boku>
+		</payment>
+	</default>
+
+	<crontab>
+		<jobs>
+			<boku_cron>
+				<!-- run at midnight daily. Note cron execution must be setup on the server for this to run. -->
+				<schedule><cron_expr>0 0 * * *</cron_expr></schedule>
+				<run><model>boku/cron::run</model></run>
+			</boku_cron>
+		</jobs>
+	</crontab>
+</config>

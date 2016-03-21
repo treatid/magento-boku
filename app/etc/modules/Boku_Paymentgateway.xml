@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento module for the Boku Payment Gateway
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author 		MDH <mdh@treatid.me.uk>
+ */
+-->
+<config>
+	<modules>
+		<Boku_Paymentgateway>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Checkout/>
+			</depends>
+		</Boku_Paymentgateway>
+	</modules>
+</config>

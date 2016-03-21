@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento backend layout
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author 		MDH <mdh@treatid.me.uk>
+ */
+-->
+<layout>
+	<boku_admin_adminhtml_boku_test>
+		<reference name="left">
+			<block type="adminhtml/system_config_switcher" name="adminhtml.system.config.switcher" before="-"/>
+		</reference>
+		<reference name="content">
+			<block type="adminhtml/template" name="boku_test" template="boku/paymentgateway/test.phtml"/>
+		</reference>
+	</boku_admin_adminhtml_boku_test>
+	<boku_admin_adminhtml_standard_prepare>
+		<reference name="content">
+			<block type="boku/adminhtml_payment_standard_prepare" name="adminhtml.boku.prepare" template="boku/paymentgateway/standard/prepare.phtml" />
+		</reference>
+	</boku_admin_adminhtml_standard_prepare>
+
+</layout>

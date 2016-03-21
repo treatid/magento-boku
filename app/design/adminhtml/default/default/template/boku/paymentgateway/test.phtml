@@ -1,0 +1,63 @@
+<?php
+/**
+ * Admin form for testing
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author		MDH <mdh@treatid.me.uk>
+ */
+
+$helper =  $this->helper('boku');
+
+$helper->getSession()->unsScopeObject();
+$store = $helper->getStore();
+
+$country = $store->getConfig('general/country/default');
+$currency = $store->getConfig('currency/options/default');
+$merchant_id = $helper->getConfig('merchant_id');
+$service_id = $helper->getConfig('service_id');
+$api_key = $helper->getConfig('api_security_key');
+
+$settings_incomplete = empty($merchant_id) || empty($api_key) || empty($service_id);
+$test = Mage::getSingleton('boku/test')->testConnection();
+if (!$settings_incomplete){
+	$price_info = Mage::getSingleton('boku/prices')->fetchPrices($currency, $country, 99);
+	$prices = Mage::getSingleton('boku/prices')->fetchPrices($currency, $country);
+}
+?>
+<div class="content-header">
+	<h3 class="icon-head"><?php echo $helper->__('Boku Settings') ?></h3>
+</div>
+<div class="entry-edit">
+	<b>Merchant ID: </b><?php echo $merchant_id; ?><br>
+	<b>Service ID: </b><?php echo $service_id; ?><br>
+	<b>API Security Key: </b><?php echo ($api_key ? 'Yes ('.strlen($api_key).' chars)' : 'No'); ?><br>
+	<b>Country: </b><?php echo $country; ?><br>
+	<b>Currency: </b><?php echo $currency; ?><br>
+	<b>Base Currency: </b><?php echo $helper->getBaseCurrencyCode(); ?><br>
+	<b>Boku pricelist URL: </b><?php echo $helper->getConfig('url/pricelist'); ?><br>
+	<b>Callback URL: </b><?php echo $helper->getCallbackUrl(); ?><br>
+</div>
+
+<div class="messages">
+<div class="content-header">
+	<h3 class="icon-head"><?php echo $helper->__('Boku Connection Test') ?></h3>
+</div>
+<?php echo implode('<br>', $test); ?>
+
+<?php if (!$settings_incomplete): ?>
+<div class="content-header">
+	<h3 class="icon-head"><?php echo $helper->__('Boku Price Point Data') ?></h3>
+</div>
+<?php
+	if (empty($prices)){
+		echo $helper->__('No price data found...check your settings').'<br>';
+		echo $helper->__('Has your Boku service been approved by Boku ?');
+	}else{
+		echo '<pre>'.json_encode($price_info, JSON_PRETTY_PRINT).'</pre>';
+		echo '<pre>'.json_encode($prices, JSON_PRETTY_PRINT).'</pre>';
+	}
+?>
+<?php endif; ?>
+</div>

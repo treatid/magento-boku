@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento admin configuration section
+ * Config options for Boku module
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author 		MDH <mdh@treatid.me.uk>
+ */
+-->
+<config>
+	<sections>
+		<payment>
+			<groups>
+				<boku translate="label" module="boku">
+					<label>Boku (Pay by Mobile)</label>
+					<comment><![CDATA[<a href="https://www.boku.com/merchant-partnerships/" target="_blank">Sign up for a Boku account</a>]]></comment>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<merchant_id translate="label" module="boku">
+							<label>Merchant ID</label>
+							<comment><![CDATA[This is your Boku Merchant ID.]]></comment>
+							<sort_order>0</sort_order>
+							<required>1</required>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</merchant_id>
+						<api_security_key translate="label" module="boku">
+							<label>API Security Key</label>
+							<comment><![CDATA[This is your Boku API security key<br> (stored as encrypted data).]]></comment>
+							<frontend_type>text</frontend_type>
+							<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</api_security_key>
+						<service_id translate="label" module="boku">
+							<label>Service ID</label>
+							<comment><![CDATA[This is your Boku service id. (Not the service name)]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</service_id>
+						<sub_merchant_name translate="label" module="boku">
+							<label>Sub Merchant Name</label>
+							<comment><![CDATA[This appears as an identifier on the Boku payment panel.<br>If left blank then the panel uses the service name specified in your Boku account.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</sub_merchant_name>
+						<mode translate="label">
+							<label>Mode</label>
+							<frontend_type>select</frontend_type>
+							<source_model>boku/system_config::getModeOptions</source_model>
+							<sort_order>14</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</mode>
+						<auto_invoice translate="label">
+							<label>Generate Invoices</label>
+							<comment><![CDATA[If the payment process completes and the total paid matches the order total then should we generate an invoice ? This also sends the generated invoice to the customer (if possible).]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>16</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</auto_invoice>
+						<message_success translate="label" module="boku">
+							<label>Success Message</label>
+							<comment><![CDATA[Optional additional message for the payment success page.]]></comment>
+							<frontend_type>text</frontend_type>
+							<config_path>payment/boku/message/success</config_path>
+							<sort_order>17</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</message_success>
+						<active translate="label">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>19</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</active>
+
+						<heading_standard translate="label">
+							<label>Standard Payment Settings</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</heading_standard>
+						<title translate="label">
+							<label>Title</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</title>
+						<allowspecific translate="label">
+							<label>Payment from Applicable Countries</label>
+							<comment><![CDATA[This country restriction is applied to the Billing Address.]]></comment>
+							<frontend_type>allowspecific</frontend_type>
+							<sort_order>35</sort_order>
+							<source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</allowspecific>
+						<specificcountry translate="label">
+							<label>Payment from Specific Countries</label>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>40</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</specificcountry>
+						<min_order_total translate="label">
+							<label>Minimum Order Total</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>45</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</min_order_total>
+						<max_order_total translate="label">
+							<label>Maximum Order Total</label>
+							<comment><![CDATA[Minimum and Maximum totals will also be restricted by your Boku account settings.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</max_order_total>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>55</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<frontend_class>validate-number</frontend_class>
+						</sort_order>
+<!--
+NOT IMPLEMENTED
+						<heading_extended translate="label">
+							<label>Extended Payment Settings</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</heading_extended>
+						<commission_add translate="label" module="boku">
+							<label>Add Commission</label>
+							<comment><![CDATA[Add estimated Boku and Carrier commissions to the basket value for all Boku payments.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>boku/system_config::getCommissionOptions</source_model>
+							<sort_order>105</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</commission_add>
+						<below_min translate="label" module="boku">
+							<label>Value Below Minimum</label>
+							<comment><![CDATA[What if the value is below the minimum possible ?]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>boku/system_config::getPaymentBelowMinOptions</source_model>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</below_min>
+						<above_max translate="label" module="boku">
+							<label>Value Above Maximum</label>
+							<comment><![CDATA[What if the value is above the maximum possible ?]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>boku/system_config::getPaymentAboveMaxOptions</source_model>
+							<sort_order>115</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</above_max>
+						<unavailable translate="label" module="boku">
+							<label>Value Unavailable</label>
+							<comment><![CDATA[What if the value is in the allowed range but the price point is unavailable ? <i>(because of Carrier or your Boku admin settings)</i>]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>boku/system_config::getPaymentUnavailableOptions</source_model>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</unavailable>
+-->
+						<heading_advanced translate="label">
+							<label><![CDATA[Advanced Settings<br>You should <b>NOT</b> change these settings unless advised to by Boku.]]></label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</heading_advanced>
+						<url_callback translate="label" module="boku">
+							<label>Callback URL</label>
+							<comment><![CDATA[This is the url used by the Boku server to notify your server of transaction events.<br>Leave blank to use the default (e.g. <i>yourdomain</i>/boku/api), only specify if you require an unusual connection.<br>NOTE: The default value includes the store scope so you may need to be careful with a complex configuration.]]></comment>
+							<frontend_type>text</frontend_type>
+							<config_path>payment/boku/url/callback</config_path>
+							<sort_order>202</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</url_callback>
+						<callback_ips translate="label" module="boku">
+							<label>Callback IPs</label>
+							<comment><![CDATA[For additional security you can specify a semi-colon delimited list of IP addresses allowed for callbacks. If blank then there are no restrictions.]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>203</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</callback_ips>
+						<url_pricelist translate="label" module="boku">
+							<label>Pricelist URL</label>
+							<frontend_type>text</frontend_type>
+							<config_path>payment/boku/url/pricelist</config_path>
+							<sort_order>205</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</url_pricelist>
+						<url_priceinfo translate="label" module="boku">
+							<label>Priceinfo URL</label>
+							<frontend_type>text</frontend_type>
+							<config_path>payment/boku/url/priceinfo</config_path>
+							<sort_order>206</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</url_priceinfo>
+						<url_prepare translate="label" module="boku">
+							<label>Prepare URL</label>
+							<frontend_type>text</frontend_type>
+							<config_path>payment/boku/url/prepare</config_path>
+							<sort_order>210</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+						</url_prepare>
+					</fields>
+				</boku>
+			</groups>
+		</payment>
+	</sections>
+</config>

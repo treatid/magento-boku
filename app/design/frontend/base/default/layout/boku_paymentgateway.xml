@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Boku payment layout
+ *
+ * @category	Payment gateway
+ * @package		boku_paymentgateway
+ * @copyright	Copyright (c) Boku (http://www.boku.com/)
+ * @author		MDH <mdh@treatid.me.uk>
+ */
+-->
+<layout version="0.1.0">
+	<boku_standard_prepare>
+		<reference name="content">
+			<block type="boku/payment_standard_prepare" name="boku.prepare" template="boku/paymentgateway/standard/prepare.phtml" />
+		</reference>
+	</boku_standard_prepare>
+
+	<boku_standard_cancel>
+		<reference name="root">
+			<action method="setTemplate"><template>page/empty.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<block type="boku/payment_standard_cancel" name="boku.cancel" template="boku/paymentgateway/standard/cancel.phtml" />
+		</reference>
+	</boku_standard_cancel>
+
+	<boku_standard_success>
+		<reference name="root">
+			<action method="setTemplate"><template>page/empty.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<block type="boku/payment_standard_success" name="boku.success" template="boku/paymentgateway/standard/success.phtml" />
+		</reference>
+	</boku_standard_success>
+
+</layout>
